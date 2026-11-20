@@ -1,260 +1,366 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRADER MUNAAF | Market Education &amp; Chart Reading Community</title>
+  <meta name="description" content="Join Trader Munaaf's educational community for learning sessions, market concepts, chart reading, and educational case discussions." />
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans Devanagari for crisp Hindi typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            hindi: ['"Noto Sans Devanagari"', 'sans-serif'],
+          },
+          colors: {
+            obsidian: '#060913',
+            cardDark: '#0B1120',
+            brandCyan: '#06B6D4',
+            brandGold: '#F59E0B',
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-4px)' },
+            },
+            shimmer: {
+              '0%': { transform: 'translateX(-120%) skewX(-20deg)' },
+              '60%, 100%': { transform: 'translateX(260%) skewX(-20deg)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
 
-html,
-body{
-    width:100%;
-    height:100%;
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#0b6eb8,#18c13d);
-}
+  <style>
+    /* Executive mobile-first viewport styling */
+    body {
+      background-color: #050811;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-body{
-    overflow-x:hidden;
-}
+    .ambient-grid {
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+    }
 
-/* Full Screen Container */
+    .glass-card {
+      background: linear-gradient(170deg, rgba(13, 19, 35, 0.92) 0%, rgba(7, 10, 20, 0.97) 100%);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow:
+        0 20px 50px -12px rgba(0, 0, 0, 0.9),
+        0 0 28px -6px rgba(6, 182, 212, 0.16),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
 
-.sio-main-container{
-    width:100%;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+    .emblem-ring {
+      box-shadow:
+        0 0 22px rgba(6, 182, 212, 0.35),
+        0 0 38px rgba(245, 158, 11, 0.22),
+        inset 0 0 12px rgba(0, 0, 0, 0.65);
+    }
 
-/* Full Screen Card */
+    .cta-gradient {
+      background: linear-gradient(135deg, #06B6D4 0%, #0284C7 48%, #4F46E5 100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px -4px rgba(6, 182, 212, 0.45), 0 4px 12px -2px rgba(79, 70, 229, 0.35);
+    }
 
-.sio-landing-wrap{
-    width:100%;
-    min-height:100vh;
-    background:#fff;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:30px 20px;
-}
+    .cta-gradient:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 12px 28px -3px rgba(6, 182, 212, 0.6), 0 6px 16px -2px rgba(79, 70, 229, 0.45);
+    }
 
-/* Pulse Animation */
+    .cta-gradient:active {
+      transform: scale(0.985);
+    }
 
-@keyframes pulse-blue{
-0%{box-shadow:0 0 0 0 rgba(11,110,184,.7);}
-70%{box-shadow:0 0 0 18px rgba(11,110,184,0);}
-100%{box-shadow:0 0 0 0 rgba(11,110,184,0);}
-}
+    .pillar-item {
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
 
-/* Button */
-
-.sio-btn{
-    width:100%;
-    max-width:350px;
-    background:linear-gradient(45deg,#0b6eb8,#0a8be0);
-    color:#fff;
-    text-decoration:none;
-    padding:16px;
-    font-size:17px;
-    font-weight:700;
-    border-radius:50px;
-    margin:18px 0;
-    animation:pulse-blue 2s infinite;
-    transition:.3s;
-}
-
-.sio-btn:hover{
-    transform:scale(1.05);
-}
-
-/* Profile */
-
-.sio-profile{
-    margin:20px 0;
-}
-
-.sio-avatar{
-    width:120px;
-    height:120px;
-    margin:auto;
-    border-radius:50%;
-    overflow:hidden;
-    border:4px solid #fff;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
-}
-
-.sio-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.sio-headline{
-    margin-top:15px;
-    font-size:28px;
-    font-weight:800;
-    color:#18c13d;
-}
-
-/* Features */
-
-.sio-features{
-    margin-top:20px;
-    width:100%;
-    max-width:450px;
-}
-
-.sio-feature{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    margin:12px 0;
-}
-
-.sio-tick{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    background:#eaf7ea;
-    color:#18c13d;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
-}
-
-.sio-feature p{
-    color:#333;
-    font-weight:600;
-    font-size:16px;
-}
-
-/* Highlight */
-
-.sio-highlight{
-    margin-top:20px;
-    background:#eef7ff;
-    color:#0b6eb8;
-    padding:12px;
-    border-radius:10px;
-    font-weight:700;
-}
-
-/* Disclaimer */
-
-.sio-disclaimer{
-    margin-top:25px;
-    font-size:12px;
-    color:#666;
-    line-height:1.6;
-    max-width:450px;
-}
-
-/* Mobile */
-
-@media(max-width:480px){
-
-.sio-headline{
-    font-size:24px;
-}
-
-.sio-btn{
-    font-size:15px;
-}
-
-.sio-feature p{
-    font-size:14px;
-}
-
-}
-</style>
+    .pillar-item:hover {
+      border-color: rgba(6, 182, 212, 0.32);
+      background-color: rgba(30, 41, 59, 0.48);
+    }
+  </style>
 </head>
+<body class="ambient-grid min-h-[100dvh] flex items-center justify-center px-3.5 py-3 sm:py-6 selection:bg-cyan-500/30 selection:text-cyan-200">
 
-<body>
+  <!-- Subtle Ambient Top Glow -->
+  <div class="fixed top-[-8%] left-1/2 -translate-x-1/2 w-[320px] h-[200px] bg-cyan-500/12 rounded-full blur-[85px] pointer-events-none z-0"></div>
 
-<div class="sio-main-container">
+  <!-- Compact Mobile-Sized Executive Container (390px - 405px target width) -->
+  <main class="relative z-10 w-full max-w-[396px] mx-auto">
+    
+    <!-- Outer Metallic Cyan/Gold Rim -->
+    <div class="p-[1px] rounded-[24px] bg-gradient-to-b from-cyan-400/65 via-amber-400/20 to-slate-800/85 shadow-2xl">
+      
+      <!-- Inner Obsidian Glass Card -->
+      <div class="glass-card rounded-[23px] px-4 py-4.5 sm:px-5 sm:py-5">
 
-<div class="sio-landing-wrap">
+        <!-- Compact Brand Emblem & Header -->
+        <header class="flex flex-col items-center text-center mb-3.5">
+          
+          <!-- Custom Circular Double-Ring Metallic Gold & Cyan SVG Vector Emblem -->
+          <div class="relative mb-2.5 animate-float">
+            <div class="w-[82px] h-[82px] rounded-full p-[2px] bg-gradient-to-tr from-cyan-400 via-amber-300 to-amber-500 emblem-ring">
+              <div class="w-full h-full rounded-full bg-slate-950 p-[2px]">
+                <div class="w-full h-full rounded-full bg-gradient-to-b from-amber-300 via-amber-400 to-amber-600 flex items-center justify-center relative overflow-hidden border border-amber-200/60">
+                  <svg class="w-full h-full" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Trader Munaaf Bull and Candlestick Emblem">
+                    <!-- Subtle Inner Metallic Ring -->
+                    <circle cx="60" cy="60" r="55" stroke="#090D16" stroke-width="1.5" stroke-opacity="0.35" />
+                    
+                    <!-- Green & Red Candlestick Bars -->
+                    <!-- Left Red Candle -->
+                    <line x1="25" y1="36" x2="25" y2="74" stroke="#991B1B" stroke-width="2.2" stroke-linecap="round" />
+                    <rect x="21.5" y="44" width="7" height="19" rx="1.5" fill="#DC2626" stroke="#090D16" stroke-width="1" />
+                    
+                    <!-- Right Green Candle -->
+                    <line x1="95" y1="30" x2="95" y2="72" stroke="#065F46" stroke-width="2.2" stroke-linecap="round" />
+                    <rect x="91.5" y="38" width="7" height="22" rx="1.5" fill="#059669" stroke="#090D16" stroke-width="1" />
 
-<a class="sio-btn" href="https://t.me/+2cdLCMNfl2IxNWM1" target="_blank">
-🚀 JOIN TELEGRAM CHANNEL
-</a>
+                    <!-- Stylized Charging Golden/Dark Bull Silhouette -->
+                    <path d="M36 44C34 39 30 36 26 36C29 40 31 43 33 46C30 48 29 52 31 55L37 57L43 53L56 55L68 52L78 57L85 54L83 47C86 45 89 41 91 36C87 37 83 39 80 42C75 38 67 36 58 37C49 38 42 41 36 44Z" fill="#090D16" />
+                    
+                    <!-- Crisp Bullish Breakout Arrow -->
+                    <path d="M41 32L55 24L65 28L80 19M80 19H72M80 19V26" stroke="#065F46" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+                    
+                    <!-- Sharp Emblem Typography -->
+                    <text x="60" y="74" text-anchor="middle" fill="#090D16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="13" letter-spacing="0.6">TRADER</text>
+                    <text x="60" y="88.5" text-anchor="middle" fill="#090D16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="13.5" letter-spacing="0.6">MUNAAF</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<div class="sio-profile">
+          <!-- Clean Brand Header "MUNAAF" -->
+          <h1 class="text-xl sm:text-[22px] font-extrabold tracking-[0.06em] text-white uppercase leading-none">
+            MUNAAF
+          </h1>
 
-<div class="sio-avatar">
-<img src="https://i.ibb.co/KjrBVv9h/mr88-B4-MCQeolto-Xob-M9-JEe-Eyn-ZMn-Bj-FMz-Ac0-SMDAi-h-Ff1-Qg-RBAkl-Xo7yo-Kxe-N-POtqpyfq-Ow-Kv-VPc-Ao-I-I.jpg" alt="Profile">
-</div>
+          <!-- Verified / Educational Badge Pill -->
+          <div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/95 border border-cyan-500/25 text-[11px] font-semibold text-cyan-300 tracking-wide">
+            <svg class="w-3.5 h-3.5 text-amber-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+            </svg>
+            <span>Market Education &amp; Insights</span>
+          </div>
+        </header>
 
-<div class="sio-headline">
-Work From Home Handwriting Job
-</div>
+        <!-- Sleek, Compact 4-Item Feature List -->
+        <section aria-label="Core Learning Pillars" class="space-y-2 mb-3.5">
+          
+          <!-- Item 1 -->
+          <div class="pillar-item flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800/85">
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h2 class="text-[13px] font-semibold text-slate-100 leading-tight truncate">Learning &amp; Educational Sessions</h2>
+              <p class="text-[11px] text-slate-400 mt-0.5 truncate">Live structured market breakdowns</p>
+            </div>
+          </div>
 
-</div>
+          <!-- Item 2 -->
+          <div class="pillar-item flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800/85">
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h2 class="text-[13px] font-semibold text-slate-100 leading-tight truncate">Market Concepts &amp; Awareness</h2>
+              <p class="text-[11px] text-slate-400 mt-0.5 truncate">Price action &amp; risk fundamentals</p>
+            </div>
+          </div>
 
-<div class="sio-features">
+          <!-- Item 3 -->
+          <div class="pillar-item flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800/85">
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h2 class="text-[13px] font-semibold text-slate-100 leading-tight truncate">Chart Reading Concepts</h2>
+              <p class="text-[11px] text-slate-400 mt-0.5 truncate">Technical structure &amp; trend analysis</p>
+            </div>
+          </div>
 
-<div class="sio-feature">
-<div class="sio-tick">✓</div>
-<p>Simple Writing Work – No Experience Needed</p>
-</div>
+          <!-- Item 4 -->
+          <div class="pillar-item flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800/85">
+            <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/25 flex items-center justify-center text-indigo-400">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h2 class="text-[13px] font-semibold text-slate-100 leading-tight truncate">Educational Case Discussions</h2>
+              <p class="text-[11px] text-slate-400 mt-0.5 truncate">Real-world historical chart studies</p>
+            </div>
+          </div>
 
-<div class="sio-feature">
-<div class="sio-tick">✓</div>
-<p>Earn ₹15,000 – ₹30,000 Per Month</p>
-</div>
+        </section>
 
-<div class="sio-feature">
-<div class="sio-tick">✓</div>
-<p>Work From Home • Flexible Timing</p>
-</div>
+        <!-- Primary High-Contrast Telegram CTA & Fallback Pill -->
+        <section aria-label="Join Telegram Community" class="text-center mb-3.5">
+          <a
+            id="telegramCtaBtn"
+            href="https://t.me/tradermunaaf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-gradient group relative overflow-hidden w-full flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-xl text-white font-bold text-[15px] tracking-wider uppercase cursor-pointer select-none"
+          >
+            <!-- Subtle Continuous Shimmer Sweep -->
+            <span aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-[shimmer_3.5s_infinite]"></span>
 
-<div class="sio-highlight">
-🚀 Limited Seats Available – Apply Today!
-</div>
+            <!-- Official Telegram Paper-Plane SVG -->
+            <svg class="relative z-10 w-5 h-5 text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            <span class="relative z-10">JOIN TELEGRAM</span>
+          </a>
 
-</div>
+          <!-- Secondary Compact Copy Invite Link Pill -->
+          <div class="mt-2 flex justify-center">
+            <button
+              type="button"
+              id="copyHandleBtn"
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-[11px] font-medium text-cyan-300 transition-colors cursor-pointer"
+            >
+              <svg class="w-3 h-3 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+              </svg>
+              <span id="copyBtnText">Copy Invite Link</span>
+            </button>
+          </div>
+        </section>
 
-<a class="sio-btn" href="https://t.me/+2cdLCMNfl2IxNWM1" target="_blank">
-🚀 JOIN TELEGRAM CHANNEL
-</a>
+        <!-- Hindi Motivational Quote in Dark Frosted Pill -->
+        <section aria-label="Inspirational Quote" class="mb-3">
+          <div class="rounded-xl bg-slate-900/80 border border-amber-400/20 px-3.5 py-2.5 text-center backdrop-blur-md">
+            <p class="font-hindi text-[13px] font-semibold text-amber-100/95 leading-snug">
+              &ldquo;नियत अच्छी और मेहनत सच्ची हो, तो कामयाबी जरूर मिलती है।&rdquo;
+            </p>
+          </div>
+        </section>
 
-<div class="sio-disclaimer">
-<b style="color:#0a7a3a;">Note:</b><br>
-This is project-based work. Earnings depend on performance and submission quality.
-</div>
+        <!-- Compact Disclaimer & Agency Footer -->
+        <footer class="space-y-2 pt-2 border-t border-slate-800/80 text-center">
+          <p class="text-[10px] text-slate-400 leading-tight">
+            For educational purposes only. Not SEBI-registered investment advice.
+          </p>
 
-</div>
+          <div class="w-full py-1.5 px-3 rounded-lg bg-slate-950/90 border border-slate-800/90">
+            <p class="text-[10.5px] text-slate-400 font-medium tracking-wide">
+              Promoted by <span class="text-cyan-400 font-bold tracking-wider uppercase ml-1">AD BUILD AGENCY</span>
+            </p>
+          </div>
+        </footer>
 
-</div>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1495548339273021');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1495548339273021&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->  
+      </div>
+    </div>
+  </main>
+
+  <!-- Non-intrusive Toast Notification -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300"
+  >
+    <div class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/95 border border-cyan-500/40 text-xs font-medium text-cyan-200 shadow-xl backdrop-blur-md">
+      <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <span id="toastMessage">Telegram link copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Hidden Input for Reliable Clipboard Copy inside WebViews/Iframes -->
+  <input type="text" id="hiddenLinkInput" value="https://t.me/tradermunaaf" class="sr-only" aria-hidden="true" tabindex="-1" readonly />
+
+  <script>
+    /**
+     * Configuration: Update your actual Telegram invite link here
+     */
+    const TELEGRAM_URL = "https://t.me/tradermunaaf";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const ctaBtn = document.getElementById("telegramCtaBtn");
+      const copyBtn = document.getElementById("copyHandleBtn");
+      const copyBtnText = document.getElementById("copyBtnText");
+      const hiddenInput = document.getElementById("hiddenLinkInput");
+      const toast = document.getElementById("toast");
+      const toastMessage = document.getElementById("toastMessage");
+
+      // Sync URL across elements
+      if (ctaBtn) ctaBtn.href = TELEGRAM_URL;
+      if (hiddenInput) hiddenInput.value = TELEGRAM_URL;
+
+      let toastTimeout;
+      function showToast(message) {
+        toastMessage.textContent = message;
+        toast.classList.remove("opacity-0", "translate-y-3");
+        toast.classList.add("opacity-100", "translate-y-0");
+
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("opacity-100", "translate-y-0");
+          toast.classList.add("opacity-0", "translate-y-3");
+        }, 2800);
+      }
+
+      // Copy link handler (supports Instagram in-app browser & sandboxed iframes)
+      copyBtn.addEventListener("click", () => {
+        try {
+          hiddenInput.select();
+          hiddenInput.setSelectionRange(0, 99999);
+          const successful = document.execCommand("copy");
+
+          if (successful) {
+            copyBtnText.textContent = "Invite Link Copied!";
+            showToast("Telegram invite link copied! Paste in Telegram.");
+            setTimeout(() => {
+              copyBtnText.textContent = "Copy Invite Link";
+            }, 2500);
+          } else {
+            showToast("Link: " + TELEGRAM_URL);
+          }
+        } catch (err) {
+          showToast("Link: " + TELEGRAM_URL);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
+```
